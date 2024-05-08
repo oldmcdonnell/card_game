@@ -1,3 +1,5 @@
+import random
+
 print("program activated")
 
 
@@ -23,4 +25,12 @@ print ('\u2663')
 
 deck = [Card(value, color) for value in values for color in colors]
 
-print(deck)
+# for i in deck:
+#     print(i.value, i.color)
+
+random.shuffle(deck)
+
+for i in deck:
+    print(i.value, i.color)
+hand = deck[0]
+print('hand is', hand.value, hand.color)
