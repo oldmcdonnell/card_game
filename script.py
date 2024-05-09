@@ -30,24 +30,30 @@ class Deck():
     def __str__(self):
         return "\n".join(str(card) for card in self.cards)
 
+class Player():
+    def __init__(self, name, hand):
+        self.name = name
+        self.hand = hand
 
-# if __name__ == "__main__":
-#     deck = Deck(packs=2)
-#     print(deck)      
-deck_test = Deck(packs=2)
+# # if __name__ == "__main__":
+# #     deck = Deck(packs=2)
+# #     print(deck)      
+# deck_test = Deck(packs=2)
 
-for i in deck_test:
-    print
-# class Player():
-#     def __init__(self, name, hand):
-#         self.name = name
-#         self.hand = hand
+# print(deck_test.cards[0], 'and' ,deck_test.cards[1])
+
     
-# def introduce_player():
-#     name_input = input("Hello, please input your name: ")
-#     deck_input = input("how many decks do you want to play with? ")
-#     deck = Deck(packs = deck_input)
-#     player_one = Player(name_input)
-#     print('Hello', player_one.name)
+def introduce_player():
+    name_input = input("Hello, please input your name: ")
+    deck_input = input("how many decks do you want to play with? ")
+    deck = Deck(packs = int(deck_input))
+    player_hand = deck.cards[0]
+    player_one = Player(name_input, player_hand)
+    computer_hand = deck.cards[1]
+    computer_player = Player("Player",computer_hand)
+    print('Hello', player_one.name)
+    print("Your card is the", player_one.hand)
+    print("The computer cards is the", computer_player.hand)
+
 
 introduce_player()
