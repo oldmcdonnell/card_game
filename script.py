@@ -127,16 +127,18 @@ class Player():
 
 class Game():
     def create_decks(self):
-        deck_input = input("how many decks do you want?")
-        return Deck(packs = int(deck_input))
-    def set_name():
-        name_input = input("Please enter your name")
-        return name_input
+        self.num_of_decks = input("how many decks do you want?")
 
+    def set_name(self):
+        self.name_input = input("Please enter your name")
+    
     def __init__(self, deck):
-        self.deck = deck
+        self.num_of_decks = 0
+        self.name = ""
 
-
+# new_game = Game()
+# new_game.set_name()
+# new_game.create_decks()
 # # if __name__ == "__main__":
 # #     deck = Deck(packs=2)
 # #     print(deck)      
@@ -166,7 +168,7 @@ def introduce_player():
     player_hand = deck.cards[0]
     player_one = Player(name_input, player_hand)
     computer_hand = deck.cards[1]
-    computer_player = Player("Player",computer_hand)
+    computer_player = Player("Computer",computer_hand)
     print('Hello', player_one.name)
     print("Your card is the", player_one.hand)
     print("The computer cards is the", computer_player.hand)
