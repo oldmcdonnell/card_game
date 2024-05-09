@@ -54,6 +54,13 @@ def introduce_player():
     print('Hello', player_one.name)
     print("Your card is the", player_one.hand)
     print("The computer cards is the", computer_player.hand)
+    return player_one.hand, computer_hand 
 
 
-introduce_player()
+hands = introduce_player()
+
+def determine_winner(hands):
+    
+    time.sleep(3)
+    print(hands[0], hands[1])
+determine_winner(hands)
