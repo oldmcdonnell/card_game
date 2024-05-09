@@ -7,18 +7,61 @@ import itertools
 
 suits = ['♥', '♦', '♣', '♠']
 
-values = ['2', '3', '4', '5', '6', 
+values = [{"value":2,
+            "face":'2'
+            },
+            {'value':3,
+            "face":'3'
+            },
+            {"value":4,
+             "face":'4'
+             },
+             {"value":5,
+              "face":5
+             },
+             {"value":6,
+                "face":'6'
+             },
+             {"value":7,
+                "face":'7'
+             },
+             {"value":8,
+                "face":'8'
+             },
+             {"value":9,
+                "face":'9'
+             },
+             {"value":10,
+                "face":'10'
+             },
+             {"value":11,
+                "face":'Jack'
+             },
+             {"value":12,
+                "face":'Queen'
+             },
+             {"value":13,
+                "face":'King'
+             },
+             {"value":14,
+                "face":'Ace'
+             }
+             ]
+
+faces = ['2', '3', '4', '5', '6', 
           '7', '8', '9', '10', 
           'Jack', 'Queen', 'King', 'Ace']
 
 #basic card class
 class Card:
     def __init__(self, value, suit):
-        self.value = value
+        self.value = value["value"]
+        self.face = value["face"]
         self.suit = suit
+
     
     def __str__(self):
-        return f"{self.value} of {self.suit}"
+        return f"{self.face} of {self.suit}"
 
 class Deck():
     def __init__(self, packs = 1):
@@ -55,14 +98,17 @@ class Player():
 
 test1 = Winner()
 test2 = Winner()
-if str(test1.cards[1]) == str(test2.cards[1]):
+if test1.cards[1].value == test2.cards[2].value:
     print("test success")
+    print(test1.cards[1].value, test2.cards[1].value)
 else:
     print("test fail")
-    print(test1.cards[1], test2.cards[1])
+    print(test1.cards[1], test2.cards[12])
 
-for i in test1.cards:
-    print(i)
+
+# for i in test1.cards:
+#     print(i)
+
 
 
 def introduce_player():
@@ -83,11 +129,11 @@ hands = introduce_player()
 # winner_list = [Card(value, suit) for value in values for suit in suits]
 
 def determine_winner(hands):
-    winner_list = Winner()
-    # if winner_list.cards.index(hands[0]) > winner_list.cards.index(hands[1]):
-    #     print("player wins")
-    # else:
-    #     print("computer wins")
-    # time.sleep(3)
+
+    if hands[0].hand.value > hands[1].hand.value:
+        print("player wins")
+    else:
+        print("computer wins")
+    time.sleep(3)
     print(f'{hands[0].name}s hand is the {hands[0].hand}, Computer hand is the {hands[1].hand}')
 determine_winner(hands)
