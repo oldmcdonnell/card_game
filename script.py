@@ -5,6 +5,52 @@ import random
 import itertools
 
 
+# class BuildingBlocks:
+#     def __init__(self, suits, values):
+#         self.suits = suits
+#         ['♥', '♦', '♣', '♠']
+#         self.values = [{"value":2,
+#                     "face":'2'
+#                     },
+#                     {'value':3,
+#                     "face":'3'
+#                     },
+#                     {"value":4,
+#                     "face":'4'
+#                     },
+#                     {"value":5,
+#                     "face":5
+#                     },
+#                     {"value":6,
+#                         "face":'6'
+#                     },
+#                     {"value":7,
+#                         "face":'7'
+#                     },
+#                     {"value":8,
+#                         "face":'8'
+#                     },
+#                     {"value":9,
+#                         "face":'9'
+#                     },
+#                     {"value":10,
+#                         "face":'10'
+#                     },
+#                     {"value":11,
+#                         "face":'Jack'
+#                     },
+#                     {"value":12,
+#                         "face":'Queen'
+#                     },
+#                     {"value":13,
+#                         "face":'King'
+#                     },
+#                     {"value":14,
+#                         "face":'Ace'
+#                     }
+#                     ]
+
+
 suits = ['♥', '♦', '♣', '♠']
 
 values = [{"value":2,
@@ -48,10 +94,6 @@ values = [{"value":2,
              }
              ]
 
-faces = ['2', '3', '4', '5', '6', 
-          '7', '8', '9', '10', 
-          'Jack', 'Queen', 'King', 'Ace']
-
 #basic card class
 class Card:
     def __init__(self, value, suit):
@@ -63,6 +105,8 @@ class Card:
     def __str__(self):
         return f"{self.face} of {self.suit}"
 
+
+
 class Deck():
     def __init__(self, packs = 1):
         self.packs = packs
@@ -72,22 +116,26 @@ class Deck():
 
     def __str__(self):
         return "\n".join(str(card) for card in self.cards)
-    
-class Winner():
-    def __init__(self, packs = 1):
-        self.packs = packs
-        self.cards = [Card(value, suit) for value, suit in itertools.product(values, suits) 
-                      for _pack in range(packs)]
-
-
-    def __str__(self):
-        return "\n".join(str(card) for card in self.cards)
 
 
 class Player():
-    def __init__(self, name, hand):
+    def __init__(self, name, hand=0, wins=0):
         self.name = name
         self.hand = hand
+        self.wins = wins
+
+
+class Game():
+    def create_decks(self):
+        deck_input = input("how many decks do you want?")
+        return Deck(packs = int(deck_input))
+    def set_name():
+        name_input = input("Please enter your name")
+        return name_input
+
+    def __init__(self, deck):
+        self.deck = deck
+
 
 # # if __name__ == "__main__":
 # #     deck = Deck(packs=2)
@@ -96,18 +144,18 @@ class Player():
 
 # print(deck_test.cards[0], 'and' ,deck_test.cards[1])
 
-test1 = Winner()
-test2 = Winner()
-if test1.cards[1].value == test2.cards[2].value:
-    print("test success")
-    print(test1.cards[1].value, test2.cards[1].value)
-else:
-    print("test fail")
-    print(test1.cards[1], test2.cards[12])
+# test1 = Winner()
+# test2 = Winner()
+# if test1.cards[1].value == test2.cards[2].value:
+#     print("test success")
+#     print(test1.cards[1].value, test2.cards[1].value)
+# else:
+#     print("test fail")
+#     print(test1.cards[1], test2.cards[12])
 
 
-# for i in test1.cards:
-#     print(i)
+# # for i in test1.cards:
+# #     print(i)
 
 
 
@@ -125,15 +173,29 @@ def introduce_player():
     return player_one, computer_player 
 
 
-hands = introduce_player()
-# winner_list = [Card(value, suit) for value in values for suit in suits]
+players = introduce_player()
 
-def determine_winner(hands):
 
-    if hands[0].hand.value > hands[1].hand.value:
+def determine_winner(players):
+
+    if players[0].hand.value == players[1].hand.value:
+        print("draw")
+    elif players[0].hand.value > players[1].hand.value:
         print("player wins")
+        players[0].wins += 1
     else:
         print("computer wins")
+        players[1].wins += 1
     time.sleep(3)
-    print(f'{hands[0].name}s hand is the {hands[0].hand}, Computer hand is the {hands[1].hand}')
-determine_winner(hands)
+    print(f'{players[0].name} has {players[0].wins} wins, Computer has {players[1].wins} win')
+    new_game = input ("Do you want to play again (Y/N)?")
+    if new_game == "Y":
+        start_new_game(players)
+        return players
+    else:
+        quit()
+
+players = determine_winner(players)
+
+def start_new_game(players):
+    new_hand = Deck()
