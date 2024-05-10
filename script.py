@@ -1,9 +1,12 @@
+#import monkeypatch
+import secrets
+import string
 import copy
 import sys
 import time
 import random
 import itertools
-
+import pytest
 
 #basic card class
 class Card:
@@ -81,7 +84,7 @@ class Game():
         if self.player_one.hand.value == self.computer_player.hand.value:
             print("draw")
         elif self.player_one.hand.value  > self.computer_player.hand.value:
-            print("player wins")
+            print(f'{self.player_one.name} wins')
             self.player_one.wins += 1
         else:
             print("computer wins")
@@ -110,6 +113,13 @@ class Game():
 
     def set_name(self):
         return input("Please enter your name: ")
+    
+    def test_name(self):
+        character = string.ascii_letters + string.digits
+        name_input = secrets.choice()
+        #monkeypatch.setattr('builtins.input', lambda _: "Mark")
+        name = input("Please enter your name: ")
+        assert name
 
     
     def __init__(self):
@@ -123,82 +133,5 @@ class Game():
 
 
 
-
 Game()
-# new_game.set_name()
-# new_game.create_decks()
-
-# def start_game():
-#     print(f'{new_game.name} has {new_game.player_wins} wins, Computer has {new_game.computer_wins} wins')
-#     deck = Deck(packs = int(new_game.num_of_decks))
-#     player_hand = deck.cards[0]
-#     player_one = Player(new_game.name, player_hand)
-#     computer_hand = deck.cards[1]
-#     computer_player = Player("Computer",computer_hand)
-#     print('Hello', new_game.name)
-#     print("Your card is the", player_one.hand)
-#     print("The computer cards is the", computer_player.hand)
-#     return player_one, computer_player 
-
-
-# players = start_game()
-
-# def start_new_game():
-#     print(f'{new_game.name} has {new_game.player_wins} wins, Computer has {new_game.computer_wins} wins')
-#     time.sleep(2)
-#     deck = Deck(packs = int(new_game.num_of_decks))
-#     player_hand = deck.cards[0]
-#     player_one = Player(new_game.name, player_hand )
-#     computer_hand = deck.cards[1]
-#     computer_player = Player("Computer", computer_hand)
-#     print('Hello', new_game.name)
-#     print("Your card is the", player_one.hand)
-#     print("The computer cards is the", computer_player.hand)
-
-# def determine_winner(players):
-#     if players[0].hand.value == players[1].hand.value:
-#         print("draw")
-#     elif players[0].hand.value > players[1].hand.value:
-#         print("player wins")
-#         new_game.player_wins += 1
-#     else:
-#         print("computer wins")
-#         new_game.computer_wins += 1
-#     time.sleep(2)
-#     another_game = input ("Do you want to play again (Y/N)?")
-#     if another_game == "Y":
-#         start_new_game()
-#         return players
-#     else:
-#         quit()
-
-
-# players = determine_winner(players)
-
-# def start_new_game():
-#     print(f'{new_game.name} has {new_game.player_wins} wins, Computer has {new_game.computer_wins} wins')
-#     time.sleep(2)
-#     deck = Deck(packs = int(new_game.num_of_decks))
-#     player_hand = deck.cards[0]
-#     player_one = Player(new_game.name, player_hand )
-#     computer_hand = deck.cards[1]
-#     computer_player = Player("Computer", computer_hand)
-#     print('Hello', new_game.name)
-#     print("Your card is the", player_one.hand)
-#     print("The computer cards is the", computer_player.hand)
-# players = determine_winner(players)
-
-# def start_new_game(players):
-#     new_game.player_wins = players[0].wins
-#     new_game.computer_wins = players[1].wins
-#     print(f'{new_game.name} has {new_game.player_wins} wins, Computer has {new_game.computer_wins} wins')
-#     time.sleep(2)
-#     deck = Deck(packs = int(new_game.ne computer cards is the", computer_player.hand)
-#     player_hand = deck.cards[0]
-#     player_one = Player(new_game.name, player_hand )
-#     computer_hand = deck.cards[1]
-#     computer_player = Player("Computer", computer_hand)
-#     print('Hello', new_game.name)
-#     print("Your card is the", player_one.hand)
-#     print("The computer cards is the", computer_player.hand)
-#     return player_one, computer_player
+pytest.main()
