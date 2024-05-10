@@ -96,6 +96,7 @@ class Game():
 
 
     def deal(self):
+        self.deck = Deck(int(self.num_of_decks))
         self.player_one.hand = self.deck.cards[0]
         self.computer_player.hand = self.deck.cards[1]
         print("Your card is the", self.player_one.hand)
