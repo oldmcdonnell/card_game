@@ -101,10 +101,8 @@ class Card:
         self.face = value["face"]
         self.suit = suit
 
-    
     def __str__(self):
         return f"{self.face} of {self.suit}"
-
 
 
 class Deck():
@@ -123,81 +121,99 @@ class Player():
         self.name = name
         self.hand = hand
         self.wins = wins
+        self.repeat = True
 
 
 class Game():
     def create_decks(self):
-        self.num_of_decks = input("how many decks do you want?")
+        self.num_of_decks = input("how many decks do you want? ")
 
     def set_name(self):
-        self.name_input = input("Please enter your name")
+        self.name_input = input("Please enter your name: ")
     
-    def __init__(self, deck):
+    def __init__(self):
         self.num_of_decks = 0
         self.name = ""
-
-# new_game = Game()
-# new_game.set_name()
-# new_game.create_decks()
-# # if __name__ == "__main__":
-# #     deck = Deck(packs=2)
-# #     print(deck)      
-# deck_test = Deck(packs=2)
-
-# print(deck_test.cards[0], 'and' ,deck_test.cards[1])
-
-# test1 = Winner()
-# test2 = Winner()
-# if test1.cards[1].value == test2.cards[2].value:
-#     print("test success")
-#     print(test1.cards[1].value, test2.cards[1].value)
-# else:
-#     print("test fail")
-#     print(test1.cards[1], test2.cards[12])
+        self.player_wins = 0
+        self.computer_wins = 0
+        self.stored_data = {}
 
 
-# # for i in test1.cards:
-# #     print(i)
+new_game = Game()
+new_game.set_name()
+new_game.create_decks()
 
-
-
-def introduce_player():
-    name_input = input("Hello, please input your name: ")
-    deck_input = input("how many decks do you want to play with? ")
-    deck = Deck(packs = int(deck_input))
+def start_game():
+    print(f'{new_game.name} has {new_game.player_wins} wins, Computer has {new_game.computer_wins} wins')
+    deck = Deck(packs = int(new_game.num_of_decks))
     player_hand = deck.cards[0]
-    player_one = Player(name_input, player_hand)
+    player_one = Player(new_game.name, player_hand)
     computer_hand = deck.cards[1]
     computer_player = Player("Computer",computer_hand)
-    print('Hello', player_one.name)
+    print('Hello', new_game.name)
     print("Your card is the", player_one.hand)
     print("The computer cards is the", computer_player.hand)
     return player_one, computer_player 
 
 
-players = introduce_player()
+players = start_game()
 
+def start_new_game():
+    print(f'{new_game.name} has {new_game.player_wins} wins, Computer has {new_game.computer_wins} wins')
+    time.sleep(2)
+    deck = Deck(packs = int(new_game.num_of_decks))
+    player_hand = deck.cards[0]
+    player_one = Player(new_game.name, player_hand )
+    computer_hand = deck.cards[1]
+    computer_player = Player("Computer", computer_hand)
+    print('Hello', new_game.name)
+    print("Your card is the", player_one.hand)
+    print("The computer cards is the", computer_player.hand)
 
 def determine_winner(players):
-
     if players[0].hand.value == players[1].hand.value:
         print("draw")
     elif players[0].hand.value > players[1].hand.value:
         print("player wins")
-        players[0].wins += 1
+        new_game.player_wins += 1
     else:
         print("computer wins")
-        players[1].wins += 1
-    time.sleep(3)
-    print(f'{players[0].name} has {players[0].wins} wins, Computer has {players[1].wins} win')
-    new_game = input ("Do you want to play again (Y/N)?")
-    if new_game == "Y":
-        start_new_game(players)
+        new_game.computer_wins += 1
+    time.sleep(2)
+    another_game = input ("Do you want to play again (Y/N)?")
+    if another_game == "Y":
+        start_new_game()
         return players
     else:
         quit()
 
+
 players = determine_winner(players)
 
-def start_new_game(players):
-    new_hand = Deck()
+def start_new_game():
+    print(f'{new_game.name} has {new_game.player_wins} wins, Computer has {new_game.computer_wins} wins')
+    time.sleep(2)
+    deck = Deck(packs = int(new_game.num_of_decks))
+    player_hand = deck.cards[0]
+    player_one = Player(new_game.name, player_hand )
+    computer_hand = deck.cards[1]
+    computer_player = Player("Computer", computer_hand)
+    print('Hello', new_game.name)
+    print("Your card is the", player_one.hand)
+    print("The computer cards is the", computer_player.hand)
+players = determine_winner(players)
+
+# def start_new_game(players):
+#     new_game.player_wins = players[0].wins
+#     new_game.computer_wins = players[1].wins
+#     print(f'{new_game.name} has {new_game.player_wins} wins, Computer has {new_game.computer_wins} wins')
+#     time.sleep(2)
+#     deck = Deck(packs = int(new_game.ne computer cards is the", computer_player.hand)
+#     player_hand = deck.cards[0]
+#     player_one = Player(new_game.name, player_hand )
+#     computer_hand = deck.cards[1]
+#     computer_player = Player("Computer", computer_hand)
+#     print('Hello', new_game.name)
+#     print("Your card is the", player_one.hand)
+#     print("The computer cards is the", computer_player.hand)
+#     return player_one, computer_player
